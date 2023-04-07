@@ -1,19 +1,20 @@
 <template>
           <li class="mb-7">
-        <router-link
+        <router-link :to="jobPageLink"
           class="mx-auto block rounded border border-solid border-brand-gray-2 bg-white hover:shadow-gray"
-          to="/jobs/results/1"
         >
           <div class="mx-8 border-b border-solid border-brand-gray-2 pt-5 pb-2">
             <h2 class="mb-2 text-2xl">
-              Technical Program, Preception, Augmented Reality
+              {{ job.title }}
             </h2>
             <div class="flex flex-row align-middle">
               <div class="mr-5">
-                <span>Bobo</span>
+                <span>{{job.organization}}</span>
               </div>
               <div>
-                <span>San Francisco, CA USA</span>
+                <ul>
+                  <li v-for="location in job.locations" :key="location" class="inline-block mr-5">{{ location }}</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -22,14 +23,12 @@
               <h3 class="mt-1 mb-2"></h3>
               <div>
                 <ul class="list-disc pl-8">
-                  <li>Bachelor's degree or equivalent practical experience</li>
-                  <li>5 years experience in program management.</li>
+                  <li v-for="qualification in job.minimumQualifications"> {{ qualification }}</li>
                 </ul>
               </div>
             </div>
             <div class="mt-2 text-center">
-              <router-link
-                to="/jobs/results"
+              <router-link :to="jobPageLink"
                 class="text-brand-blue-1"
               >Expand</router-link>
             </div>
@@ -40,6 +39,20 @@
 
 <script>
 export default {
-    name: "JobListing"
+    name: "JobListing",
+    props: {
+      job: {
+        type: Object,
+        required: true,
+      }
+    },
+    computed: {
+      jobPageLink() {
+        return `/jobs/results/${this.job.id}`;
+      }
+    },
+    mounted() {
+      console.log('job', this.job);
+    }
 }
 </script>
