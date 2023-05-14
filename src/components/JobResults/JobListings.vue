@@ -1,5 +1,5 @@
 <template>
-  <main class="flex-auto bg-brand-gray-2 p-8">
+  <main class="flex-auto p-8 bg-brand-gray-2">
     <ol>
       <job-listing v-for="job in displayedJobs" :key="job.id" :job="job" />
     </ol>
@@ -36,7 +36,7 @@
 import { mapActions, mapState } from "pinia";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
-import { useJobsStore, FETCH_JOBS } from "@/stores/jobs";
+import { useJobsStore, FETCH_JOBS, FILTERED_JOBS_ORGANIZATIONS} from "@/stores/jobs";
 
 export default {
   name: "JobListings",
@@ -51,17 +51,17 @@ export default {
       return previousPage >= firstPage ? previousPage : undefined;
     },
     ...mapState(useJobsStore, {
-      jobs: "jobs",
+      FILTERED_JOBS_ORGANIZATIONS,
       nextPage() {
         const nextPage = this.currentPage + 1;
-        const maxPage = Math.ceil(this.jobs.length / 10);
+        const maxPage = Math.ceil(this.FILTERED_JOBS_ORGANIZATIONS.length / 10);
         return nextPage <= maxPage ? nextPage : undefined;
       },
       displayedJobs() {
         const pageNumber = this.currentPage;
         const firstJobIndex = (pageNumber - 1) * 10;
         const lastJobIndex = pageNumber * 10;
-        return this.jobs.slice(firstJobIndex, lastJobIndex);
+        return this.FILTERED_JOBS_ORGANIZATIONS.slice(firstJobIndex, lastJobIndex);
       },
     }),
   },
