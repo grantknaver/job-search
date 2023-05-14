@@ -1,9 +1,9 @@
 <template>
           <li class="mb-7">
         <router-link :to="jobPageLink"
-          class="mx-auto block rounded border border-solid border-brand-gray-2 bg-white hover:shadow-gray"
+          class="block mx-auto bg-white border border-solid rounded border-brand-gray-2 hover:shadow-gray"
         >
-          <div class="mx-8 border-b border-solid border-brand-gray-2 pt-5 pb-2">
+          <div class="pt-5 pb-2 mx-8 border-b border-solid border-brand-gray-2">
             <h2 class="mb-2 text-2xl">
               {{ job.title }}
             </h2>
@@ -22,7 +22,7 @@
             <div>
               <h3 class="mt-1 mb-2"></h3>
               <div>
-                <ul class="list-disc pl-8">
+                <ul class="pl-8 list-disc">
                   <li v-for="qualification in job.minimumQualifications"> {{ qualification }}</li>
                 </ul>
               </div>
@@ -51,8 +51,5 @@ export default {
         return `/jobs/results/${this.job.id}`;
       }
     },
-    mounted() {
-      console.log('job', this.job);
-    }
 }
 </script>
