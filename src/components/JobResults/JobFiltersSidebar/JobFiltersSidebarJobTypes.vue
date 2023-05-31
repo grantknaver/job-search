@@ -1,22 +1,22 @@
 <template>
-  <collapsible-accordion header="Job Types">
+  <collapsible-accordion :header="header">
     <div class="mt-5">
       <fieldset>
         <ul class="flex flex-row flex-wrap">
           <li
-            v-for="jobType in UNIQUE_JOB_TYPES"
-            :key="jobType"
+            v-for="value in uniqueValues"
+            :key="value"
             class="w-1/2 h-8"
           >
             <input
-              :id="jobType"
-              v-model="selectedJobTypes"
-              :value="jobType"
+              :id="value"
+              v-model="selectedValues"
+              :value="value"
               type="checkbox"
               class="mr-3"
-              @change="selectJobType"
+              @change="selectValue"
             />
-            <label :for="jobType">{{ jobType }}</label>
+            <label :for="value">{{ value }}</label>
           </li>
         </ul>
       </fieldset>
@@ -24,31 +24,42 @@
   </collapsible-accordion>
 </template>
 
-<script>
-import { mapActions, mapState } from "pinia";
+<script setup>
+def
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { useJobsStore, UNIQUE_JOB_TYPES } from "@/stores/jobs";
-import { useUserStore, ADD_SELECTED_JOB_TYPES } from "@/stores/user";
+import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/user";
 
 import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
 
-export default {
-  name: "JobFiltersSidebarJobTypes",
-  components: { CollapsibleAccordion },
-  data() {
-    return {
-      selectedJobTypes: [],
-    };
+const props = defineProps({
+  header: {
+    type: String,
+    required: true
   },
-  computed: {
-    ...mapState(useJobsStore, [UNIQUE_JOB_TYPES]),
-  },
-  methods: {
-    ...mapActions(useUserStore, [ADD_SELECTED_JOB_TYPES]),
-    selectJobType() {
-      this.ADD_SELECTED_JOB_TYPES(this.selectedJobTypes);
-      this.$router.push({name: "JobResults"})
-    }
-  },
+  uniqueValues: {
+    type: Set,
+    required: true,
+  }, 
+  action: {
+    type: Function,
+    required: true,
+  }
+})
+
+// const selectedJobTypes = ref([]);
+const selectedValues = ref([]);
+
+// const jobsStore = useJobsStore();
+// const UNIQUE_JOB_TYPES = computed(() => jobsStore.UNIQUE_JOB_TYPES);
+
+const userStore = useUserStore();
+const router = useRouter();
+
+const selectValue = () => {
+  props.action(selectedValues.value);
+  router.push({name: "JobResults"});
 };
 </script>

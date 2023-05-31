@@ -1,22 +1,22 @@
 <template>
   <form @submit.prevent="searchForJobs()"
-    class="flex h-12 w-full items-center rounded-3xl border border-solid border-brand-gray-3"
+    class="flex items-center w-full h-12 border border-solid rounded-3xl border-brand-gray-3"
   >
     <font-awesome-icon :icon="['fas', 'search']" class="ml-4 mr-3" />
 
-    <div class="flex h-full flex-1 flex-nowrap text-base font-light">
-      <div class="relative flex h-full flex-1 items-center pr-3">
+    <div class="flex flex-1 h-full text-base font-light flex-nowrap">
+      <div class="relative flex items-center flex-1 h-full pr-3">
         <label for="role" class="absolute left-0 -top-10">Role</label>
         <text-input id="role" v-model="role" placeholder="Software engineer" />
       </div>
 
       <span
-        class="flex h-full items-center border-l border-r border-brand-gray-3 bg-brand-gray-2 px-3"
+        class="flex items-center h-full px-3 border-l border-r border-brand-gray-3 bg-brand-gray-2"
       >
         in
       </span>
 
-      <div class="relative flex h-full flex-1 items-center pl-3">
+      <div class="relative flex items-center flex-1 h-full pl-3">
         <label for="location" class="absolute left-0 -top-10">Where?</label>
         <text-input id="location" v-model="location" placeholder="Los Angeles" />
       </div>
@@ -26,29 +26,21 @@
   </form>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import TextInput from "@/components/Shared/TextInput.vue";
-
-export default {
-  name: "JobSearchForm",
-  components: { ActionButton, TextInput },
-  data() {
-    return {
-      role: "",
-      location: "",
-    };
-  },
-  methods: {
-    searchForJobs() {
-      this.$router.push({
+const role = ref("");
+const location = ref("");
+const router = useRouter();
+const searchForJobs = () => {
+  router.push({
         name: "JobResults",
         query: {
-          role: this.role,
-          location: this.location,
+          role: role.value,
+          location: location.value,
         }
-      });
-    },
-  }
+  });
 };
 </script>

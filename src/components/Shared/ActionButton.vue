@@ -4,10 +4,9 @@
   </button>
 </template>
 
-<script>
-export default {
-  name: "ActionButton",
-  props: {
+<script setup>
+import { computed, toRefs } from 'vue';
+  const props = defineProps({
     text: {
       type: String,
       required: true,
@@ -20,15 +19,9 @@ export default {
         return ["primary", "secondary"].includes(value);
       },
     },
-  },
-  computed: {
-    buttonClass() {
-      return {
-        [this.type]: true,
-      };
-    },
-  },
-};
+  });
+  const { type } = toRefs(props);
+  const buttonClass = computed(() => ({[type.value]: true}));
 </script>
 
 <style scoped>
