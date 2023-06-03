@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col h-screen">
+  <main class="flex h-screen flex-col">
     <section class="pt-10 pb-20">
       <div class="grid grid-cols-12">
         <div class="col-span-1 col-start-1"></div>
@@ -9,9 +9,9 @@
           <job-search-form />
         </div>
 
-        <div class="self-center col-span-5 col-start-7 justify-self-center">
+        <div class="col-span-5 col-start-7 self-center justify-self-center">
           <img
-            class="object-contain h-80 w-80"
+            class="h-80 w-80 object-contain"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png"
           />
         </div>
@@ -24,11 +24,11 @@
       <template #default="{ img, title, description }">
         <router-link
           to="/jobs/results"
-          class="flex flex-col mx-5 border rounded-lg h-96 w-72 bg-brand-gray-2"
+          class="mx-5 flex h-96 w-72 flex-col rounded-lg border bg-brand-gray-2"
         >
           <img :src="img" class="object-contain" />
 
-          <div class="h-48 px-6 py-4 mt-3">
+          <div class="mt-3 h-48 px-6 py-4">
             <h3 class="text-lg font-medium">
               {{ title }}
             </h3>
@@ -49,17 +49,8 @@
   </main>
 </template>
 
-<script>
+<script setup lang="ts">
 import TheHeadline from "@/components/JobSearch/TheHeadline.vue";
 import JobSearchForm from "@/components/JobSearch/JobSearchForm.vue";
 import SpotLight from "@/components/JobSearch/SpotLight.vue";
-
-export default {
-  name: "TheHero",
-  components: {
-    TheHeadline,
-    JobSearchForm,
-    SpotLight,
-  },
-};
 </script>

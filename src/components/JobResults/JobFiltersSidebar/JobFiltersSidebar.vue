@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col p-4 bg-white border-r border-solid w-96 border-brand-gray-1"
+    class="flex w-96 flex-col border-r border-solid border-brand-gray-1 bg-white p-4"
   >
     <section class="pb-5">
       <div class="flex flex-row justify-between">
@@ -9,29 +9,30 @@
           <action-button text="Clear Filters" type="secondary" />
         </div>
       </div>
-      <collapsible-accordion header="Degree">
-      </collapsible-accordion>
-      <job-filters-sidebar-checkbox-group 
-      header="Job Types" 
-      :unique-values="UNIQUE_JOB_TYPES" :action="userStore.ADD_SELECTED_JOB_TYPES"
+      <collapsible-accordion header="Degree"> </collapsible-accordion>
+      <job-filters-sidebar-checkbox-group
+        header="Job Types"
+        :unique-values="UNIQUE_JOB_TYPES"
+        :action="userStore.ADD_SELECTED_JOB_TYPES"
       />
-      <job-filters-sidebar-checkbox-group 
-      header="Organizations" 
-      :unique-values="UNIQUE_ORGANIZATIONS"
-      :action="userStore.ADD_SELECTED_ORGANIZATIONS" />
+      <job-filters-sidebar-checkbox-group
+        header="Organizations"
+        :unique-values="UNIQUE_ORGANIZATIONS"
+        :action="userStore.ADD_SELECTED_ORGANIZATIONS"
+      />
     </section>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
 
 import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarCheckboxGroup.vue";
 
-import { useJobsStore } from '@/stores/jobs';
-import { useUserStore } from '@/stores/user';
+import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/user";
 
 const jobsStore = useJobsStore();
 const UNIQUE_ORGANIZATIONS = computed(() => jobsStore.UNIQUE_ORGANIZATIONS);
