@@ -17,7 +17,10 @@ import { useJobsStore } from "@/stores/jobs";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
-const onJobResultsPage = computed(() => useRoute.name === "JobResults");
+const onJobResultsPage = computed(() => {
+  const route = useRoute();
+  return route.name === "JobResults";
+});
 const jobsStore = useJobsStore();
 const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS);
 </script>
