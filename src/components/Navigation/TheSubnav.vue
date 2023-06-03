@@ -12,15 +12,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { useJobsStore } from "@/stores/jobs";
-import { useRoute } from "vue-router";
+<script lang="ts" setup>
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 
-const onJobResultsPage = computed(() => {
-  const route = useRoute();
-  return route.name === "JobResults";
-});
+import { useJobsStore } from "@/stores/jobs";
+
+const route = useRoute();
+const onJobResultsPage = computed(() => route.name === "JobResults");
+
 const jobsStore = useJobsStore();
 const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS);
 </script>
