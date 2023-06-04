@@ -22,7 +22,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-import { useUserStore, CLEAR_USER_JOB_FILTER } from "@/stores/user";
+import { useUserStore, CLEAR_USER_JOB_FILTER_SELECTIONS } from "@/stores/user";
 
 const props = defineProps({
   uniqueValues: {
@@ -46,7 +46,7 @@ const selectValue = () => {
 const userStore = useUserStore();
 userStore.$onAction(({ after, name }) => {
   after(() => {
-    if (name === CLEAR_USER_JOB_FILTER) {
+    if (name === CLEAR_USER_JOB_FILTER_SELECTIONS) {
       selectedValues.value = [];
     }
   });

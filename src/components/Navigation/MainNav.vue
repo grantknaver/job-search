@@ -48,10 +48,10 @@ const userStore = useUserStore();
 const LOGIN_USER = userStore.LOGIN_USER;
 const menuItems = ref([
   { text: "Teams", url: "/teams" },
-  { text: "Locations", url: "/" },
-  { text: "Life at Bobo Corp", url: "/" },
-  { text: "How we hire", url: "/" },
-  { text: "Students", url: "/" },
+  // { text: "Locations", url: "/" },
+  // { text: "Life at Bobo Corp", url: "/" },
+  // { text: "How we hire", url: "/" },
+  // { text: "Students", url: "/" },
   { text: "Jobs", url: "/jobs/results" },
 ]);
 const isLoggedIn = computed(() => userStore.isLoggedIn);

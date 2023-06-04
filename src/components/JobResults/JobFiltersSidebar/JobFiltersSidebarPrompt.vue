@@ -5,7 +5,7 @@
       <action-button
         text="Clear Filters"
         type="secondary"
-        @click="userStore.CLEAR_USER_JOB_FILTER()"
+        @click="userStore.CLEAR_USER_JOB_FILTER_SELECTIONS"
       />
     </div>
   </div>
